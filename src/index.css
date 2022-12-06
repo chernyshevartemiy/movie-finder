@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  content-box: border-box;
+  font-family: 'Sf';
+  color: #EAEAEA;
+  font-size: 18px;
+}
+
+body {
+  background: #1E1E1E;
+}
+
+input {
+  font-family: 'Font Awesome 5 Free', 'Sf';
+}
+
+@font-face {
+  font-family: 'Sf';
+  src: url('./assets/fonts/SF-Pro-Display-Regular.otf');
+}
+
+h1 {
+  font-family: 'Bowlby One SC', cursive;
+}
