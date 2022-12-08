@@ -1,12 +1,17 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 
-export const fetchMovies = createAsyncThunk('movie/fetchMovies', async (query, {rejectWithValue, dispatch, getState}) => {
+export const fetchMovies = createAsyncThunk('movie/fetchMovies', async (query, {
+  rejectWithValue,
+  dispatch,
+}) => {
   try {
     if (query) {
       const response = await fetch(`https://search.imdbot.workers.dev?q=${query}`)
       const data = await response.json()
+      console.log(data)
       dispatch(setMovies(data.description))
-      console.log(getState().movieSlice.movies)
+    } else if (query === '') {
+      dispatch(setMovies([]))
     }
   } catch (error) {
     return rejectWithValue(error.message)
@@ -15,7 +20,7 @@ export const fetchMovies = createAsyncThunk('movie/fetchMovies', async (query, {
 
 const initialState = {
   movies: [],
-  status: 'loading',
+  status: 'success',
 }
 const movieSlice = createSlice({
   name: 'movie',
