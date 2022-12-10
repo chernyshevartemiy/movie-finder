@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Input = ({onChangeInput, search}) => {
+
   return (
     <>
       <label htmlFor='first_name' className='block mb-[10px] text-white font-bold'>Find your favourite movie</label>

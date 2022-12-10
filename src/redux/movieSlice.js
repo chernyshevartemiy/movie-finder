@@ -1,20 +1,36 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import axios from "axios";
 
-export const fetchMovies = createAsyncThunk('movie/fetchMovies', async (query, {
+export const fetchMovies = createAsyncThunk(
+  'movie/fetchMovies',
+  async (query, {
+    rejectWithValue,
+    dispatch,
+  }) => {
+    try {
+      if (query) {
+        const response = await fetch(`https://search.imdbot.workers.dev?q=${query}`)
+        const data = await response.json()
+        console.log(data)
+        dispatch(setMovies(data.description))
+      } else if (query === '') {
+        dispatch(setMovies([]))
+      }
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  })
+
+export const fetchMovieInfo = createAsyncThunk('movie/fetchMovieInfo', async (movieId, {
   rejectWithValue,
   dispatch,
+  getState
 }) => {
   try {
-    if (query) {
-      const response = await fetch(`https://search.imdbot.workers.dev?q=${query}`)
-      const data = await response.json()
-      console.log(data)
-      dispatch(setMovies(data.description))
-    } else if (query === '') {
-      dispatch(setMovies([]))
-    }
-  } catch (error) {
-    return rejectWithValue(error.message)
+    const data = await axios.get(`http://www.omdbapi.com/?i=${movieId}&apikey=[5863b2ef]`)
+    console.log(data)
+  } catch {
+
   }
 })
 

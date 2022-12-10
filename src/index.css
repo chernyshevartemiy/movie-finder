@@ -29,3 +29,17 @@ input {
 h1 {
   font-family: 'Bowlby One SC', cursive;
 }
+
+@media (max-width: 640px) {
+  .cont {
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .mimg {
+    max-width: 200px;
+    margin: 0 auto;
+    margin-bottom: 8px;
+  }
+
+}

@@ -1,8 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {getDataFromLs} from "../utils/getDataFromLs";
 
+
 const initialState = {
-  savedMovies: getDataFromLs()
+  savedMovies: getDataFromLs(),
+  searchValue: ''
 }
 
 const librarySlice = createSlice({
@@ -28,9 +30,12 @@ const librarySlice = createSlice({
         })
       }
     },
+    setSearchValue: (state, action) => {
+      state.searchValue = action.payload
+    }
   }
 })
 
 export const findMovieById = (id) => (state) => state.librarySlice.savedMovies.find((obj) => obj['#IMDB_ID'] === id)
-export const {setSavedMovies, addMovie} = librarySlice.actions
+export const {setSavedMovies, addMovie, setSearchValue} = librarySlice.actions
 export default librarySlice.reducer
