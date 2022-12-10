@@ -13,7 +13,6 @@ function App() {
         <Route element={<Main/>} path={'/'}/>
         <Route element={<Library/>} path={'/library'}/>
         <Route element={<MovieInfo/>} path={'/movie/:movieId'}/>
-        <Route element={<MovieInfo/>} path={'/movie/library/:movieId'}/>
       </Routes>
     </div>
   );

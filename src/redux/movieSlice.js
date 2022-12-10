@@ -21,19 +21,6 @@ export const fetchMovies = createAsyncThunk(
     }
   })
 
-export const fetchMovieInfo = createAsyncThunk('movie/fetchMovieInfo', async (movieId, {
-  rejectWithValue,
-  dispatch,
-  getState
-}) => {
-  try {
-    const data = await axios.get(`http://www.omdbapi.com/?i=${movieId}&apikey=[5863b2ef]`)
-    console.log(data)
-  } catch {
-
-  }
-})
-
 const initialState = {
   movies: [],
   status: 'success',

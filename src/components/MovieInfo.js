@@ -1,9 +1,22 @@
 import React from 'react';
 import {useParams} from "react-router-dom";
-import {FaImdb} from "react-icons/fa";
+import placeholder from "../assets/images/dummy_170x260_ffffff_cccccc_no-image.svg";
+import {BiCommentDots, BiWorld} from "react-icons/bi";
+import {HiOutlineLanguage} from "react-icons/hi2";
+import {FiExternalLink} from "react-icons/fi";
+import {findMovieById, setSavedMovies} from "../redux/librarySlice";
+import {useSelector, useDispatch} from "react-redux";
+import {addMovie} from "../redux/librarySlice";
 
 const MovieInfo = () => {
   const {movieId} = useParams()
+  const savedMovie = useSelector(findMovieById(movieId))
+  const dispatch = useDispatch()
+  const movieInfoItem = useSelector((state) => state.movieInfoSlice.movie)
+  const onAddHandler = () => {
+    dispatch(addMovie(movieInfoItem))
+    dispatch(setSavedMovies())
+  }
   const [movie, setMovie] = React.useState({})
   React.useEffect(() => {
     fetch(`http://www.omdbapi.com/?i=${movieId}&apikey=5863b2ef`)
@@ -15,39 +28,42 @@ const MovieInfo = () => {
   }, [])
   return (
     <div className='w-screen bg-[#1E1E1E] pt-[50px] md:pl-[40px] sm:pl-[0px] main'>
-      <div className='flex lg:flex-row sm:flex-col sm:items-center cont'>
+      <div className='flex lg:flex-row sm:flex-col sm:items-center lg:items-start cont'>
         <img
-          className='md:max-w-[260px] sm:max-w-[240px] lg:max-w-[280px] w-full h-full max-h-[500px] object-cover rounded-[8px] sm:mb-[16px] lg:mb-[0px] mimg'
-          src={movie?.Poster}
+          className='md:max-w-[260px] sm:max-w-[240px] lg:max-w-[280px] w-full h-full object-cover rounded-[8px] sm:h-[350px] sm:mb-[16px] lg:mb-[0px] lg:h-[440px] mimg'
+          src={movie.Poster === 'N/A' ? placeholder : movie?.Poster}
           alt=''
         />
         <div className='flex flex-col lg:ml-[34px] sm:ml-[10px] sm:items-center lg:items-start'>
           <span className='mb-[14px] font-bold text-[26px]'>{movie?.Title}</span>
           <span className='mb-[10px] text-[16px]'>Runtime: {movie?.Runtime}</span>
           <div className='mb-[40px] flex flex-wrap gap-[8px]'>
-            <span className='bg-[#161616] px-[6px] py-[4px] rounded-[4px] text-[14px]'>
+            <span className='bg-[#161616] px-[6px] py-[4px] rounded-[4px] text-[14px] flex items-center'>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg" alt="" className='w-[24px] mr-[8px]'/>
+              {movie?.imdbRating}
+            </span>
+            <span className='bg-[#161616] px-[8px] py-[4px] rounded-[4px] text-[14px] flex items-center'>
+              <BiWorld className='mr-[8px]'/>
+              {movie?.Country}
+            </span>
+            <span className='bg-[#161616] px-[8px] py-[4px] rounded-[4px] text-[14px] flex items-center'>
+              <HiOutlineLanguage className='mr-[8px] text-[16px]'/>
               {movie?.Language}
             </span>
             <span className='bg-[#161616] px-[8px] py-[4px] rounded-[4px] text-[14px] flex items-center'>
-              <FaImdb className='mr-[6px] text-amber-500' color={'orange'}/>
-              {movie?.imdbRating}
-            </span>
-            <span className='bg-[#161616] px-[8px] py-[4px] rounded-[4px] text-[14px]'>
-              100%
-            </span>
-            <span className='bg-[#161616] px-[8px] py-[4px] rounded-[4px] text-[14px]'>
-              86%
-            </span>
-            <span className='bg-[#161616] px-[8px] py-[4px] rounded-[4px] mr-[8px] text-[14px]'>
-              77%
+              <BiCommentDots className='mr-[8px]'/>
+              {movie?.imdbVotes}
             </span>
           </div>
           <div className='flex flex-wrap gap-[8px]'>
-            <button className='px-[8px] py-[2px] bg-[#F33F3F] rounded-[6px] text-[15px]'>
-              Watch Now
+            <button className='px-[8px] py-[2px] bg-[#F33F3F] rounded-[6px] text-[15px] flex items-center'>
+              <span className='text-[15px] mr-[8px]'>
+                <a className='text-[15px]' target='_blank' href={`https://www.imdb.com/title/${movieId}`}>Watch Now</a>
+              </span>
+              <FiExternalLink className='text-[14px]'/>
             </button>
-            <button className='px-[8px] py-[2px] bg-[#F33F3F] rounded-[6px] text-[15px]'>
-              Add to Watchlist
+            <button onClick={onAddHandler} className='px-[8px] py-[2px] bg-[#F33F3F] rounded-[6px] text-[15px]'>
+              {savedMovie?.isSaved === true ? 'Remove from Watchlist' : 'Add to Watchlist'}
             </button>
             <button className='px-[8px] py-[2px] bg-[#F33F3F] rounded-[6px] text-[15px]'>
               Trailer
