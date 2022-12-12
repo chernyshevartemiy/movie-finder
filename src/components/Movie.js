@@ -6,7 +6,7 @@ import {BiBookmarkPlus} from "react-icons/bi";
 import {BiBookmarkMinus} from 'react-icons/bi'
 import {setMovieInfo} from "../redux/movieInfoSlice";
 
-const Movie = ({movie, isImage, movieId}) => {
+const Movie = ({movie, isImage, movieId, recentHandler}) => {
   const savedMovie = useSelector(findMovieById(movieId))
   const dispatch = useDispatch()
   const addMovieHandler = () => {
@@ -15,6 +15,7 @@ const Movie = ({movie, isImage, movieId}) => {
   }
   const onSetMovieHandler = () => {
     dispatch(setMovieInfo(movie))
+    recentHandler()
   }
   return (
     <div key={movieId} className='flex flex-col max-w-[170px]'>
@@ -28,7 +29,8 @@ const Movie = ({movie, isImage, movieId}) => {
           alt=''
         />
       </NavLink>
-      <span className='font-bold text-[16px] text-[#EAEAEA] mb-[2px] overflow-ellipsis overflow-hidden whitespace-nowrap'>
+      <span
+        className='font-bold text-[16px] text-[#EAEAEA] mb-[2px] overflow-ellipsis overflow-hidden whitespace-nowrap'>
         {movie['#TITLE']}
       </span>
       <span className='flex justify-between items-center text-[14px] text-[#808080]'>

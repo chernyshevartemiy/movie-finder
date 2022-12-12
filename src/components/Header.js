@@ -30,9 +30,9 @@ const Header = () => {
     <div
       className='flex flex-col h-auto bg-[#080808] min-h-screen text-white pl-[30px] pt-[30px] pr-[30px] max-w-[320px]'>
       <h1 className='mb-[20px] text-[#F33F3F] text-[30px] leading-none font-bold'>Movie Finder</h1>
-      {location.pathname === '/' ? <Input  onChangeInput={onChangeInput} search={search}/> :
+      {location.pathname === '/' ? <Input onChangeInput={onChangeInput} search={search}/> :
         <Input onChangeInput={libraryHandler} search={search}/>}
-      <Navigation clearInput={clearInput} />
+      <Navigation clearInput={clearInput}/>
     </div>
   );
 };

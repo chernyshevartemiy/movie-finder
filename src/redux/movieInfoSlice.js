@@ -10,7 +10,6 @@ const movieInfoSlice = createSlice({
   reducers: {
     setMovieInfo: (state, action) => {
       state.movie = action.payload
-      console.log(state.movie)
     }
   }
 })

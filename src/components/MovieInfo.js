@@ -23,14 +23,13 @@ const MovieInfo = () => {
       .then((response) => response.json())
       .then((json) => {
         setMovie(json)
-        console.log(json)
       })
   }, [])
   return (
     <div className='w-screen bg-[#1E1E1E] pt-[50px] md:pl-[40px] sm:pl-[0px] main'>
       <div className='flex lg:flex-row sm:flex-col sm:items-center lg:items-start cont'>
         <img
-          className='md:max-w-[260px] sm:max-w-[240px] lg:max-w-[280px] w-full h-full object-cover rounded-[8px] sm:h-[350px] sm:mb-[16px] lg:mb-[0px] lg:h-[440px] mimg'
+          className='md:max-w-[260px] sm:max-w-[240px] lg:min-w-[300px] w-full h-full object-cover rounded-[8px] sm:h-[350px] sm:mb-[16px] lg:mb-[0px] lg:h-[440px] mimg'
           src={movie.Poster === 'N/A' ? placeholder : movie?.Poster}
           alt=''
         />
@@ -47,7 +46,7 @@ const MovieInfo = () => {
               {movie?.Country}
             </span>
             <span className='bg-[#161616] px-[8px] py-[4px] rounded-[4px] text-[14px] flex items-center'>
-              <HiOutlineLanguage className='mr-[8px] text-[16px]'/>
+              <HiOutlineLanguage className='min-w-[16px] mr-[8px] text-[16px]'/>
               {movie?.Language}
             </span>
             <span className='bg-[#161616] px-[8px] py-[4px] rounded-[4px] text-[14px] flex items-center'>
