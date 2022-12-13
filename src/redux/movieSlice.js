@@ -52,7 +52,6 @@ const movieSlice = createSlice({
       state.recentMovies = uniqueMovies
       if (state.recentMovies.length > 7 ) {
         state.recentMovies = state.recentMovies.slice(1)
-        console.log(state.recentMovies, uniqueMovies)
       }
       localStorage.setItem('recentMovies', JSON.stringify(state.recentMovies))
     }
