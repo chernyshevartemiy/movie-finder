@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Error = () => {
+const Error = ({value = 'Error nothing was found try it again.'}) => {
   return (
     <div className='text-center'>
-      <span className='text-[20px]'>Error nothing was found try it again.</span>
+      <span className='text-[20px]'>{value}</span>
     </div>
   );
 };

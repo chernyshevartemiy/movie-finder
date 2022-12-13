@@ -10,8 +10,8 @@ import {addMovie} from "../redux/librarySlice";
 
 const MovieInfo = () => {
   const {movieId} = useParams()
-  const savedMovie = useSelector(findMovieById(movieId))
   const dispatch = useDispatch()
+  const savedMovie = useSelector(findMovieById(movieId))
   const movieInfoItem = useSelector((state) => state.movieInfoSlice.movie)
   const onAddHandler = () => {
     dispatch(addMovie(movieInfoItem))

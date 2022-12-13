@@ -24,7 +24,7 @@ const librarySlice = createSlice({
       if (findItem) {
         findItem.isSaved = !findItem.isSaved
       } else {
-        state.savedMovies.push({
+        state.savedMovies.unshift({
           ...action.payload,
           isSaved: true
         })

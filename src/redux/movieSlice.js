@@ -1,4 +1,5 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import {getRecentMoviesFromLs} from "../utils/getRecentMoviesFromLs";
 
 export const fetchMovies = createAsyncThunk(
   'movie/fetchMovies',
@@ -11,13 +12,14 @@ export const fetchMovies = createAsyncThunk(
       if (query) {
         const response = await fetch(`https://search.imdbot.workers.dev?q=${query}`)
         const data = await response.json()
-        console.log(data)
-          if (data.description.length === 0) {
-            return rejectWithValue()
+          if (data.description.length === 0 || data.ok !== true) {
+            return rejectWithValue('error')
+          } else {
+            dispatch(setMovies(data.description))
           }
-        dispatch(setMovies(data.description))
       } else if (query === '') {
         dispatch(setMovies([]))
+        return rejectWithValue(null)
       }
     } catch (error) {
       return rejectWithValue(error.message)
@@ -26,8 +28,8 @@ export const fetchMovies = createAsyncThunk(
 
 const initialState = {
   movies: [],
-  status: 'success',
-  recentMovies: [],
+  status: null,
+  recentMovies: getRecentMoviesFromLs(),
 }
 const movieSlice = createSlice({
   name: 'movie',
@@ -38,9 +40,21 @@ const movieSlice = createSlice({
     },
     setRecentMovies: (state, action) => {
       state.recentMovies.push(action.payload)
-      if (state.recentMovies.length >= 7 ) {
+      const uniqueId = []
+      const uniqueMovies = state.recentMovies.filter((movie) => {
+        const isDuplicate = uniqueId.includes(movie['#IMDB_ID'])
+        if (!isDuplicate) {
+          uniqueId.push(movie['#IMDB_ID'])
+          return true
+        }
+        return false
+      })
+      state.recentMovies = uniqueMovies
+      if (state.recentMovies.length > 7 ) {
         state.recentMovies = state.recentMovies.slice(1)
+        console.log(state.recentMovies, uniqueMovies)
       }
+      localStorage.setItem('recentMovies', JSON.stringify(state.recentMovies))
     }
   },
   extraReducers: (builder) => {
@@ -51,7 +65,7 @@ const movieSlice = createSlice({
       state.status = 'loading'
     });
     builder.addCase(fetchMovies.rejected, (state, action) => {
-      state.status = 'error'
+      state.status = action.payload
     })
   }
 })
