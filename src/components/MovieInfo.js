@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useParams} from "react-router-dom";
 import placeholder from "../assets/images/dummy_170x260_ffffff_cccccc_no-image.svg";
 import {BiCommentDots, BiWorld} from "react-icons/bi";
@@ -12,12 +12,20 @@ const MovieInfo = () => {
   const {movieId} = useParams()
   const dispatch = useDispatch()
   const savedMovie = useSelector(findMovieById(movieId))
-  const movieInfoItem = useSelector((state) => state.movieInfoSlice.movie)
+  const [movie, setMovie] = React.useState({})
+  const [movieInfoItem, setMovieInfoItem] = useState({})
+  React.useEffect(() => {
+    fetch(`https://search.imdbot.workers.dev/?q=${movieId}`)
+      .then((response) => response.json())
+      .then((json) => {
+        const {0: movieInfo} = json.description
+        setMovieInfoItem(movieInfo)
+      })
+  }, [])
   const onAddHandler = () => {
     dispatch(addMovie(movieInfoItem))
     dispatch(setSavedMovies())
   }
-  const [movie, setMovie] = React.useState({})
   React.useEffect(() => {
     fetch(`http://www.omdbapi.com/?i=${movieId}&apikey=5863b2ef`)
       .then((response) => response.json())
@@ -25,6 +33,7 @@ const MovieInfo = () => {
         setMovie(json)
       })
   }, [])
+
   return (
     <div className='w-screen bg-[#1E1E1E] pt-[50px] md:pl-[40px] sm:pl-[0px] main'>
       <div className='flex lg:flex-row sm:flex-col sm:items-center lg:items-start cont'>

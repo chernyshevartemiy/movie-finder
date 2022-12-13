@@ -18,7 +18,7 @@ const Movie = ({movie, isImage, movieId, recentHandler}) => {
     recentHandler()
   }
   return (
-    <div key={movieId} className='flex flex-col max-w-[170px]'>
+    <div className='flex flex-col max-w-[170px]'>
       <NavLink
         onClick={onSetMovieHandler}
         className='min-w-[170px] max-w-[170px] h-full min-h-[260px] max-h-[260px] mb-[6px] rounded-md object-cover'
