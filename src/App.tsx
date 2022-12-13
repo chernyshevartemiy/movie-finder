@@ -10,7 +10,7 @@ function App() {
     <div className='flex'>
       <Routes>
         <Route element={<Layout/>} path={'/'}>
-          <Route element={<Main/>} index />
+          <Route element={<Main/>} index/>
           <Route element={<Library/>} path={'library'}/>
           <Route element={<MovieInfo/>} path={'movie/:movieId'}/>
         </Route>
