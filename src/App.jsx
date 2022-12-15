@@ -3,8 +3,12 @@ import Main from './components/Main';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 
-const Library = React.lazy(() => import('./components/Library'));
-const MovieInfo = React.lazy(() => import('./components/MovieInfo'));
+const Library = React.lazy(() =>
+  import(/*webpackChunkName: 'Library' */ './components/Library')
+);
+const MovieInfo = React.lazy(() =>
+  import(/*webpackChunkName: 'MovieInfo' */ './components/MovieInfo')
+);
 
 function App() {
   return (
