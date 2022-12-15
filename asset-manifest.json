@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/movie-finder/static/css/main.e0526d9a.css",
-    "main.js": "/movie-finder/static/js/main.52706f5d.js",
+    "main.js": "/movie-finder/static/js/main.40ad960b.js",
     "Library.js": "/movie-finder/static/js/Library.6e6e8184.chunk.js",
-    "MovieInfo.js": "/movie-finder/static/js/MovieInfo.42161981.chunk.js",
+    "MovieInfo.js": "/movie-finder/static/js/MovieInfo.db252ac9.chunk.js",
     "static/js/319.b843f46f.chunk.js": "/movie-finder/static/js/319.b843f46f.chunk.js",
     "static/media/SF-Pro-Display-Regular.otf": "/movie-finder/static/media/SF-Pro-Display-Regular.d95919824936a9bf4051.otf",
     "index.html": "/movie-finder/index.html",
     "static/media/dummy_170x260_ffffff_cccccc_no-image.svg": "/movie-finder/static/media/dummy_170x260_ffffff_cccccc_no-image.a27cbbbcef93c8b855b4ca8024149ccb.svg",
     "main.e0526d9a.css.map": "/movie-finder/static/css/main.e0526d9a.css.map",
-    "main.52706f5d.js.map": "/movie-finder/static/js/main.52706f5d.js.map",
+    "main.40ad960b.js.map": "/movie-finder/static/js/main.40ad960b.js.map",
     "Library.6e6e8184.chunk.js.map": "/movie-finder/static/js/Library.6e6e8184.chunk.js.map",
-    "MovieInfo.42161981.chunk.js.map": "/movie-finder/static/js/MovieInfo.42161981.chunk.js.map",
+    "MovieInfo.db252ac9.chunk.js.map": "/movie-finder/static/js/MovieInfo.db252ac9.chunk.js.map",
     "319.b843f46f.chunk.js.map": "/movie-finder/static/js/319.b843f46f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e0526d9a.css",
-    "static/js/main.52706f5d.js"
+    "static/js/main.40ad960b.js"
   ]
 }
