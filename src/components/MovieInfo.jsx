@@ -31,7 +31,7 @@ const MovieInfo = () => {
   };
 
   React.useEffect(() => {
-    fetch(`http://www.omdbapi.com/?i=${movieId}&apikey=5863b2ef`)
+    fetch(`https://www.omdbapi.com/?i=${movieId}&apikey=5863b2ef`)
       .then((response) => response.json())
       .then((json) => {
         setMovie(json);
