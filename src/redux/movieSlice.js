@@ -4,7 +4,7 @@ import {fetchMovies} from "./async/fetchMovies";
 
 const initialState = {
   movies: [],
-  status: null,
+  status:      null,
   recentMovies: getRecentMoviesFromLs(),
 }
 const movieSlice = createSlice({
