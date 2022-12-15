@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, useMatch} from "react-router-dom";
-import {IoHome} from "react-icons/io5";
+import {IoHome, IoFolderOutline} from "react-icons/io5";
 
 const CustomLink = ({to, children}) => {
   const match = useMatch(to)
@@ -11,7 +11,7 @@ const CustomLink = ({to, children}) => {
     >
       <li
         className={styles}>
-        <IoHome className='mr-[16px]'/>
+        {children === 'Home' ? <IoHome className='mr-[16px]'/> : <IoFolderOutline className='mr-[16px]' />}
         <span>{children}</span>
       </li>
     </Link>

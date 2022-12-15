@@ -1,30 +1,6 @@
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 import {getRecentMoviesFromLs} from "../utils/getRecentMoviesFromLs";
-
-export const fetchMovies = createAsyncThunk(
-  'movie/fetchMovies',
-  async (query, {
-    rejectWithValue,
-    dispatch,
-    getState
-  }) => {
-    try {
-      if (query) {
-        const response = await fetch(`https://search.imdbot.workers.dev?q=${query}`)
-        const data = await response.json()
-          if (data.description.length === 0 || data.ok !== true) {
-            return rejectWithValue('error')
-          } else {
-            dispatch(setMovies(data.description))
-          }
-      } else if (query === '') {
-        dispatch(setMovies([]))
-        return rejectWithValue(null)
-      }
-    } catch (error) {
-      return rejectWithValue(error.message)
-    }
-  })
+import {fetchMovies} from "./async/fetchMovies";
 
 const initialState = {
   movies: [],
@@ -39,7 +15,7 @@ const movieSlice = createSlice({
       state.movies = action.payload
     },
     setRecentMovies: (state, action) => {
-      state.recentMovies.push(action.payload)
+      state.recentMovies.unshift(action.payload)
       const uniqueId = []
       const uniqueMovies = state.recentMovies.filter((movie) => {
         const isDuplicate = uniqueId.includes(movie['#IMDB_ID'])
@@ -51,7 +27,7 @@ const movieSlice = createSlice({
       })
       state.recentMovies = uniqueMovies
       if (state.recentMovies.length > 7 ) {
-        state.recentMovies = state.recentMovies.slice(1)
+        state.recentMovies = state.recentMovies.slice(0, 7)
       }
       localStorage.setItem('recentMovies', JSON.stringify(state.recentMovies))
     }

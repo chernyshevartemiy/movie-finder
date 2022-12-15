@@ -4,9 +4,10 @@ import placeholder from "../assets/images/dummy_170x260_ffffff_cccccc_no-image.s
 import {BiCommentDots, BiWorld} from "react-icons/bi";
 import {HiOutlineLanguage} from "react-icons/hi2";
 import {FiExternalLink} from "react-icons/fi";
-import {findMovieById, setSavedMovies} from "../redux/librarySlice";
+import {setSavedMovies} from "../redux/librarySlice";
 import {useSelector, useDispatch} from "react-redux";
 import {addMovie} from "../redux/librarySlice";
+import {findMovieById} from "../redux/selectors";
 
 const MovieInfo = () => {
   const {movieId} = useParams()
@@ -14,6 +15,7 @@ const MovieInfo = () => {
   const savedMovie = useSelector(findMovieById(movieId))
   const [movie, setMovie] = React.useState({})
   const [movieInfoItem, setMovieInfoItem] = useState({})
+
   React.useEffect(() => {
     fetch(`https://search.imdbot.workers.dev/?q=${movieId}`)
       .then((response) => response.json())
@@ -22,10 +24,12 @@ const MovieInfo = () => {
         setMovieInfoItem(movieInfo)
       })
   }, [])
+
   const onAddHandler = () => {
     dispatch(addMovie(movieInfoItem))
     dispatch(setSavedMovies())
   }
+
   React.useEffect(() => {
     fetch(`http://www.omdbapi.com/?i=${movieId}&apikey=5863b2ef`)
       .then((response) => response.json())
@@ -33,13 +37,14 @@ const MovieInfo = () => {
         setMovie(json)
       })
   }, [])
-
+  const isPoster = movie.Poster === 'N/A' ? placeholder : movie?.Poster
+  const isSaved = savedMovie?.isSaved === true ? 'Remove from Watchlist' : 'Add to Watchlist'
   return (
     <div className='w-screen bg-[#1E1E1E] pt-[50px] md:pl-[40px] sm:pl-[0px] main'>
       <div className='flex lg:flex-row sm:flex-col sm:items-center lg:items-start cont'>
         <img
           className='md:max-w-[260px] sm:max-w-[240px] lg:min-w-[300px] w-full h-full object-cover rounded-[8px] sm:h-[350px] sm:mb-[16px] lg:mb-[0px] lg:h-[440px] mimg'
-          src={movie.Poster === 'N/A' ? placeholder : movie?.Poster}
+          src={isPoster}
           alt=''
         />
         <div className='flex flex-col lg:ml-[34px] sm:ml-[10px] sm:items-center lg:items-start'>
@@ -47,7 +52,8 @@ const MovieInfo = () => {
           <span className='mb-[10px] text-[16px]'>Runtime: {movie?.Runtime}</span>
           <div className='mb-[40px] flex flex-wrap gap-[8px]'>
             <span className='bg-[#161616] px-[6px] py-[4px] rounded-[4px] text-[14px] flex items-center'>
-              <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg" alt="" className='w-[24px] mr-[8px]'/>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg" alt=""
+                   className='w-[24px] mr-[8px]'/>
               {movie?.imdbRating}
             </span>
             <span className='bg-[#161616] px-[8px] py-[4px] rounded-[4px] text-[14px] flex items-center'>
@@ -71,10 +77,7 @@ const MovieInfo = () => {
               <FiExternalLink className='text-[14px]'/>
             </button>
             <button onClick={onAddHandler} className='px-[8px] py-[2px] bg-[#F33F3F] rounded-[6px] text-[15px]'>
-              {savedMovie?.isSaved === true ? 'Remove from Watchlist' : 'Add to Watchlist'}
-            </button>
-            <button className='px-[8px] py-[2px] bg-[#F33F3F] rounded-[6px] text-[15px]'>
-              Trailer
+              {isSaved}
             </button>
           </div>
           <div className='mt-[36px] mb-[46px] text-[16px] mr-[10px]'>

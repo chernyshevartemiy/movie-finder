@@ -24,7 +24,7 @@ const librarySlice = createSlice({
       if (findItem) {
         findItem.isSaved = !findItem.isSaved
       } else {
-        state.savedMovies.unshift({
+        state.savedMovies.push({
           ...action.payload,
           isSaved: true
         })
@@ -36,7 +36,6 @@ const librarySlice = createSlice({
   }
 })
 
-export const findMovieById = (id) => (state) => state.librarySlice.savedMovies.find((obj) => obj['#IMDB_ID'] === id)
 
 export const {setSavedMovies, addMovie, setSearchValue} = librarySlice.actions
 export default librarySlice.reducer
