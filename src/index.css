@@ -44,3 +44,12 @@ h1 {
   }
 
 }
+
+@media (max-width: 815px) {
+  .main {
+    padding-top: 66px;
+  }
+  .main p {
+    margin-bottom: 36px;
+  }
+}
