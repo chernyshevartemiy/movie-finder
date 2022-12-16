@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import placeholder from '../assets/images/dummy_170x260_ffffff_cccccc_no-image.svg';
 import { BiCommentDots, BiWorld } from 'react-icons/bi';
@@ -14,7 +14,7 @@ const MovieInfo = () => {
   const dispatch = useDispatch();
   const savedMovie = useSelector(findMovieById(movieId));
   const [movie, setMovie] = React.useState({});
-  const [movieInfoItem, setMovieInfoItem] = useState({});
+  const [movieInfoItem, setMovieInfoItem] = React.useState({});
 
   React.useEffect(() => {
     fetch(`https://search.imdbot.workers.dev/?q=${movieId}`)

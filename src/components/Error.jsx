@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Error = ({value = 'Error nothing was found try it again.'}) => {
   return (
     <div className='text-center'>

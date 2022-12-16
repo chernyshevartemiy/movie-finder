@@ -33,10 +33,10 @@ const movieSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchMovies.fulfilled, (state, action) => {
+    builder.addCase(fetchMovies.fulfilled, (state) => {
       state.status = 'success';
     });
-    builder.addCase(fetchMovies.pending, (state, action) => {
+    builder.addCase(fetchMovies.pending, (state) => {
       state.status = 'loading';
     });
     builder.addCase(fetchMovies.rejected, (state, action) => {

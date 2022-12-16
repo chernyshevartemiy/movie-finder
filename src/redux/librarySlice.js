@@ -11,7 +11,7 @@ const librarySlice = createSlice({
   name: 'library',
   initialState,
   reducers: {
-    setSavedMovies: (state, action) => {
+    setSavedMovies: (state) => {
       state.savedMovies = state.savedMovies.filter((movie) => {
         if (movie.isSaved) {
           return movie

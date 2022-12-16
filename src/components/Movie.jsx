@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMovie, setSavedMovies } from '../redux/librarySlice';
 import { NavLink } from 'react-router-dom';
