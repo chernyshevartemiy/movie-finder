@@ -1,6 +1,10 @@
 # Movie Finder
 
-This application will help you to find your favourite movie. You can see the description of the movies and add movies to your own collection of movies. The current version of application you can see at github pages.
+This application will help you to find your favourite movie. 
+
+You can see the description of the movies and add movies to your own collection of movies. 
+
+The current version of application you can see at github pages.
 
 ## Technologies, Libraries and Features
 
