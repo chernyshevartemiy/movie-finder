@@ -18,3 +18,4 @@ The current version of application you can see at github pages.
 8. **Loading and Error listeners**
 9. **Local Storage**
 10. **Responsive design**
+11. **Work with two API**
